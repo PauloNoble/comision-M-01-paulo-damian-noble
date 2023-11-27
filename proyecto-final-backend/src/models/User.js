@@ -35,6 +35,7 @@ const UserSchema = new Schema(
   }
 );
 
+//Middleware para hashear la contraseña antes de guardarla en la BD
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 

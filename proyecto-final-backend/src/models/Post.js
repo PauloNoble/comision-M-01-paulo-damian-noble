@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 
+// Se crea el Schema del modelo de datos para los posts
 const PostSchema = new Schema(
   {
     title: {
