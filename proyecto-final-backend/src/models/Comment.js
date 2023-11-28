@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 // Se crea el Schema del modelo de datos para los comments
 const CommentSchema = new Schema(
   {
-    autor: {
+    author: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
