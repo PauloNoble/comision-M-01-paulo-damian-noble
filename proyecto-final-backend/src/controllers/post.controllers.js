@@ -23,6 +23,27 @@ export const ctrlCreatePost = async (req, res) => {
   }
 };
 
+// Controlador para obtener una lista de posteos
+export const ctrlListOfPost = async (req, res) => {
+  const userId = req.user._id;
+
+  try {
+    const post = await PostModel.find({
+      author: userId,
+    })
+      .populate("author", ["username", "avatar"])
+      .populate("comments", ["description", "author"]);
+
+    if (!post) {
+      return res.status(404).json({ error: "Post no encontrado" });
+    }
+
+    return res.status(200).json(post);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 // Controlador para obtener los posteos
 export const ctrlGetPost = async (req, res) => {
   const userId = req.user._id;

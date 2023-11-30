@@ -12,6 +12,11 @@ export const createPostValidations = [
   applyValidations,
 ];
 
+//Validaciones para obtener la lista de posts
+export const listPostValidations = [
+  header("authorization").exists(),
+  applyValidations,
+];
 //Validaciones para la obtencion de posts
 export const getPostValidations = [
   param("postId")

@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { config } from "../settings/config";
+import { config } from "../settings/config.js";
 
 // con el userId se genera el token
 export const createJWT = async ({ userId }) => {

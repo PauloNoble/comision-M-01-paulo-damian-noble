@@ -21,8 +21,8 @@ export const ctrlCreateComment = async (req, res) => {
   }
 };
 
-// Controlador para obtener los comments
-export const ctrlGetComment = async (req, res) => {
+// Controlador para obtener una lista de comments
+export const ctrlListComment = async (req, res) => {
   const userId = req.user._id;
   const { commentId } = req.params;
 
@@ -41,6 +41,25 @@ export const ctrlGetComment = async (req, res) => {
     return res.status(200).json(comment);
   } catch (error) {
     return res.status(500).json({ error: error.message });
+  }
+};
+
+// Controlador parta obtener comment por id
+export const ctrlGetCommentById = async (req, res) => {
+  const { commentId, postId } = req.params;
+  const userId = req.user._id;
+
+  try {
+    const comment = await CommentModel.findOne({
+      _id: commentId,
+      post: postId,
+    }).populate("post");
+
+    if (!comment) return res.status(404).json({ error: "No existe comment" });
+
+    res.status(200).json(comment);
+  } catch (error) {
+    res.status(500).json({ error: "No se puede obtener comment" });
   }
 };
 
