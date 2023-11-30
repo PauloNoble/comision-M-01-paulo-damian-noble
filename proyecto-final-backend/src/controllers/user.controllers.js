@@ -1,7 +1,6 @@
-import { UserModel } from "../models/User";
+import { UserModel } from "../models/User.js";
 import * as bcrypt from "bcrypt";
-import {} from "module";
-import { createJWT } from "../utils/jwt";
+import { createJWT } from "../utils/jwt.js";
 
 // controlador para crear usuario
 export const ctrlCreateUser = async (req, res) => {
