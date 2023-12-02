@@ -15,7 +15,7 @@ export const ctrlCreatePost = async (req, res) => {
       author: userId,
     });
 
-    await post.save;
+    await post.create;
 
     return res.status(201).json(post);
   } catch (error) {
@@ -31,7 +31,7 @@ export const ctrlListOfPost = async (req, res) => {
     const post = await PostModel.find({
       author: userId,
     })
-      .populate("author", ["username", "avatar"])
+      .populate("author", ["title", "description", "imageURL", "createdAt"])
       .populate("comments", ["description", "author"]);
 
     if (!post) {
@@ -54,7 +54,7 @@ export const ctrlGetPost = async (req, res) => {
       _id: postId,
       author: userId,
     })
-      .populate("author", ["username", "avatar"])
+      .populate("author", ["title", "description", "imageURL", "createdAt"])
       .populate("comments", ["description", "author"]);
 
     if (!post) {
