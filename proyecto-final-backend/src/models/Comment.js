@@ -14,6 +14,11 @@ const CommentSchema = new Schema(
       maxLenght: 150,
       minLenght: 1,
     },
+    post: {
+      type: Schema.Types.ObjectId,
+      ref: "Post",
+      required: true,
+    },
   },
   {
     timestamps: true,
