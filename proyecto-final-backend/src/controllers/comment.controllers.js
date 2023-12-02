@@ -1,19 +1,20 @@
 import { CommentModel } from "../models/Comment.js";
-import { PostModel } from "../models/Post.js";
 
 // Controlador para crear comment
 export const ctrlCreateComment = async (req, res) => {
   const userId = req.user._id;
+  const { postId } = req.params;
 
   try {
     const { description } = req.body;
 
     const comment = new CommentModel({
+      post: postId,
       description,
       author: userId,
     });
 
-    await comment.save;
+    await comment.save();
 
     return res.status(201).json(comment);
   } catch (error) {
@@ -23,37 +24,29 @@ export const ctrlCreateComment = async (req, res) => {
 
 // Controlador para obtener una lista de comments
 export const ctrlListComment = async (req, res) => {
+  const { postId } = req.params;
   const userId = req.user._id;
-  const { commentId } = req.params;
 
   try {
-    const comment = await CommentModel.findOne({
-      _id: commentId,
-      author: userId,
-    })
-      .populate("author", ["username", "avatar"])
-      .populate("comments", ["description", "author"]);
+    const comments = await CommentModel.find({ post: postId }, [
+      "-__v",
+    ]).populate("post", ["-comments", "-author", "-__v"]);
 
-    if (!comment) {
-      return res.status(404).json({ error: "Comment no encontrado" });
-    }
-
-    return res.status(200).json(comment);
+    res.status(200).json(comments);
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    res.status(500).json({ error: "No se pueden obtener comments" });
   }
 };
 
 // Controlador parta obtener comment por id
 export const ctrlGetCommentById = async (req, res) => {
-  const { commentId, postId } = req.params;
+  const { commentId } = req.params;
   const userId = req.user._id;
 
   try {
     const comment = await CommentModel.findOne({
       _id: commentId,
-      post: postId,
-    }).populate("post");
+    }).populate("comment");
 
     if (!comment) return res.status(404).json({ error: "No existe comment" });
 

@@ -7,6 +7,7 @@ export const ctrlCreateUser = async (req, res) => {
   try {
     const user = new UserModel(req.body);
     await user.save();
+    res.status(201).json(user);
   } catch (error) {
     res.status(500).json({ error: "No se pudo crear el usuario" });
   }
