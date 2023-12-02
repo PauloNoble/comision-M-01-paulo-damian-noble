@@ -1,4 +1,5 @@
 import { CommentModel } from "../models/Comment.js";
+import { PostModel } from "../models/Post.js";
 
 // Controlador para crear comment
 export const ctrlCreateComment = async (req, res) => {
@@ -6,15 +7,18 @@ export const ctrlCreateComment = async (req, res) => {
   const { postId } = req.params;
 
   try {
-    const { description } = req.body;
-
     const comment = new CommentModel({
-      post: postId,
-      description,
+      ...req.body,
       author: userId,
+      post: postId,
     });
 
     await comment.save();
+
+    await PostModel.findOneAndUpdate(
+      { _id: postId },
+      { $push: { comments: comment._id } }
+    );
 
     return res.status(201).json(comment);
   } catch (error) {
@@ -24,15 +28,10 @@ export const ctrlCreateComment = async (req, res) => {
 
 // Controlador para obtener una lista de comments
 export const ctrlListComment = async (req, res) => {
-  const { postId } = req.params;
-  const userId = req.user._id;
-
   try {
-    const comments = await CommentModel.find({ post: postId }, [
-      "-__v",
-    ]).populate("post", ["-comments", "-author", "-__v"]);
+    const allComments = await CommentModel.find({}, "-__v");
 
-    res.status(200).json(comments);
+    res.status(200).json(allComments);
   } catch (error) {
     res.status(500).json({ error: "No se pueden obtener comments" });
   }
@@ -41,12 +40,11 @@ export const ctrlListComment = async (req, res) => {
 // Controlador parta obtener comment por id
 export const ctrlGetCommentById = async (req, res) => {
   const { commentId } = req.params;
-  const userId = req.user._id;
 
   try {
     const comment = await CommentModel.findOne({
       _id: commentId,
-    }).populate("comment");
+    });
 
     if (!comment) return res.status(404).json({ error: "No existe comment" });
 
@@ -58,13 +56,11 @@ export const ctrlGetCommentById = async (req, res) => {
 
 //Controlador para actualizar comment
 export const ctrlUpdateComment = async (req, res) => {
-  const userId = req.user._id;
   const { commentId } = req.params;
 
   try {
     const comment = await CommentModel.findOne({
       _id: commentId,
-      author: userId,
     });
 
     if (!comment) {

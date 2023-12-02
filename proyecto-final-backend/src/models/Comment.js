@@ -1,10 +1,10 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Types } from "mongoose";
 
 // Se crea el Schema del modelo de datos para los comments
 const CommentSchema = new Schema(
   {
     author: {
-      type: Schema.Types.ObjectId,
+      type: Types.ObjectId,
       ref: "User",
       required: true,
     },
@@ -13,11 +13,6 @@ const CommentSchema = new Schema(
       required: true,
       maxLenght: 150,
       minLenght: 1,
-    },
-    post: {
-      type: Schema.Types.ObjectId,
-      ref: "Post",
-      required: true,
     },
   },
   {

@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Types } from "mongoose";
 
 // Se crea el Schema del modelo de datos para los posts
 const PostSchema = new Schema(
@@ -16,24 +16,19 @@ const PostSchema = new Schema(
       minLenght: 5,
     },
     author: {
-      type: Schema.Types.ObjectId,
+      type: Types.ObjectId,
       ref: "User",
       required: true,
     },
     comments: [
       {
-        type: Schema.Types.ObjectId,
+        type: Types.ObjectId,
         ref: "Comment",
-        required: true,
       },
     ],
     imageURL: {
       type: String,
       required: true,
-    },
-    createdAt: {
-      type: Number,
-      default: new Date(Date.now()).getDate(),
     },
   },
   {

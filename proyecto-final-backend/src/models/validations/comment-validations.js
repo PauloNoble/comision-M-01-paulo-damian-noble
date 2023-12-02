@@ -52,13 +52,6 @@ export const getCommentValidations = [
 
 //Validaciones para la eliminacion de comments
 export const deleteCommentValidations = [
-  param("postId")
-    .notEmpty()
-    .withMessage("El parametro { postId } no debe estar vacio.")
-    .isString()
-    .withMessage("El parametro { postId } debe ser un string")
-    .custom(isValidObjectId)
-    .withMessage("El parametro { postId } debe ser una id válida."),
   param("commentId")
     .notEmpty()
     .withMessage("El parametro { commentId } no debe estar vacio.")
@@ -71,13 +64,6 @@ export const deleteCommentValidations = [
 
 //Validaciones para la actualizacion de comments
 export const updateCommentValidations = [
-  param("postId")
-    .notEmpty()
-    .withMessage("El parametro { postId } no debe estar vacio.")
-    .isString()
-    .withMessage("El parametro { postId } debe ser un string")
-    .custom(isValidObjectId)
-    .withMessage("El parametro { postId } debe ser una id válida."),
   param("commentId")
     .notEmpty()
     .withMessage("El parametro { commentId } no debe estar vacio.")

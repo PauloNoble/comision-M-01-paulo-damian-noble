@@ -1,5 +1,5 @@
 import { PostModel } from "../models/Post.js";
-import { CommentModel } from "../models/Comment.js";
+// import { CommentModel } from "../models/Comment.js";
 
 // Controlador para crear post
 export const ctrlCreatePost = async (req, res) => {
@@ -30,9 +30,7 @@ export const ctrlListOfPost = async (req, res) => {
   try {
     const post = await PostModel.find({
       author: userId,
-    })
-      // .populate("post", ["title", "description", "imageURL", "createdAt"])
-      .populate("comments", ["description", "author"]);
+    }).populate("comments", ["description", "author"]);
 
     if (!post) {
       return res.status(404).json({ error: "Post no encontrado" });
@@ -53,9 +51,7 @@ export const ctrlGetPost = async (req, res) => {
     const post = await PostModel.findOne({
       _id: postId,
       author: userId,
-    })
-      .populate("author", ["title", "description", "imageURL", "createdAt"])
-      .populate("comments", ["description", "author"]);
+    }).populate("comments", ["description", "author"]);
 
     if (!post) {
       return res.status(404).json({ error: "Post no encontrado" });
