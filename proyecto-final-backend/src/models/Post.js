@@ -15,6 +15,10 @@ const PostSchema = new Schema(
       maxLenght: 250,
       minLenght: 5,
     },
+    username: {
+      type: String,
+      required: true,
+    },
     author: {
       type: Types.ObjectId,
       ref: "User",

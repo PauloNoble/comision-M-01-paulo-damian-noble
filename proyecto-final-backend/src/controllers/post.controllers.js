@@ -6,12 +6,13 @@ export const ctrlCreatePost = async (req, res) => {
   const userId = req.user._id;
 
   try {
-    const { title, description, imageURL } = req.body;
+    const { title, description, imageURL, username } = req.body;
 
     const post = new PostModel({
       title,
       description,
       imageURL,
+      username,
       author: userId,
     });
 
@@ -25,11 +26,11 @@ export const ctrlCreatePost = async (req, res) => {
 
 // Controlador para obtener una lista de posteos
 export const ctrlListOfPost = async (req, res) => {
-  const userId = req.user._id;
+  // const userId = req.user._id;
 
   try {
     const post = await PostModel.find({
-      author: userId,
+      // author: userId,
     }).populate("comments", ["description", "author"]);
 
     if (!post) {

@@ -2,19 +2,29 @@ import { header, param, body } from "express-validator";
 import { isValidObjectId } from "mongoose";
 import { applyValidations } from "../../middlewares/apply-validations.js";
 
-//Validaciones para la creacio de posts
+//Validaciones para la creacion de posts
 export const createPostValidations = [
   body("title")
     .notEmpty()
     .withMessage("El campo { title } no debe estar vacio.")
     .isString()
     .withMessage("El campo { title } no debe ser un string."),
+  body("description")
+    .notEmpty()
+    .withMessage("El campo { description } no debe estar vacio.")
+    .isString()
+    .withMessage("El campo { description } debe ser un string."),
+  body("username")
+    .notEmpty()
+    .withMessage("El campo { username } no debe estar vacio.")
+    .isString()
+    .withMessage("El campo { username } debe ser un string."),
   applyValidations,
 ];
 
 //Validaciones para obtener la lista de posts
 export const listPostValidations = [
-  header("authorization").exists(),
+  // header("authorization").exists(),
   applyValidations,
 ];
 //Validaciones para la obtencion de posts
