@@ -14,6 +14,10 @@ const CommentSchema = new Schema(
       maxLenght: 150,
       minLenght: 1,
     },
+    username: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
