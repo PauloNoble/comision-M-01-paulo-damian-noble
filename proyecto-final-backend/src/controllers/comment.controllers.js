@@ -7,9 +7,12 @@ export const ctrlCreateComment = async (req, res) => {
   const { postId } = req.params;
 
   try {
+    const userName = req.user.username;
+
     const comment = new CommentModel({
       ...req.body,
       author: userId,
+      username: userName,
       post: postId,
     });
 
@@ -29,7 +32,7 @@ export const ctrlCreateComment = async (req, res) => {
 // Controlador para obtener una lista de comments
 export const ctrlListComment = async (req, res) => {
   try {
-    const allComments = await CommentModel.find({}, "-__v");
+    const allComments = await CommentModel.find({});
 
     res.status(200).json(allComments);
   } catch (error) {

@@ -16,27 +16,14 @@ export const createCommentValidations = [
     .withMessage("El campo { description } no debe estar vacio.")
     .isString()
     .withMessage("El campo { description } debe ser un string."),
-  body("username")
-    .notEmpty()
-    .withMessage("El campo { username } no debe estar vacio.")
-    .isString()
-    .withMessage("El campo { username } debe ser un string."),
+
   applyValidations,
 ];
 
 //Validaciones para obtener la lista de comments
-export const listCommentValidations = [
-  // param("postId")
-  //   .notEmpty()
-  //   .withMessage("El parametro { postId } no debe estar vacio.")
-  //   .isString()
-  //   .withMessage("El parametro { postId } debe ser un string.")
-  //   .custom(isValidObjectId)
-  //   .withMessage("El parametro { postId } debe ser una id válida"),
-  applyValidations,
-];
+export const listCommentValidations = [applyValidations];
 
-//Validaciones para obtener comments
+//Validaciones para obtener un comment
 export const getCommentValidations = [
   param("postId")
     .notEmpty()
@@ -82,5 +69,6 @@ export const updateCommentValidations = [
     .withMessage("El campo { description } no debe estar vacio")
     .isString()
     .withMessage("El campo { description } debe ser un string"),
+
   applyValidations,
 ];

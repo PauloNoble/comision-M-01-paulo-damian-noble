@@ -19,7 +19,7 @@ const commentRouter = Router();
 //Ruta para la creacion de comment segun id de un post
 commentRouter.post("/:postId", createCommentValidations, ctrlCreateComment);
 //Ruta para obtener los comentarios segun id de un post
-commentRouter.get("/:postId", listCommentValidations, ctrlListComment);
+commentRouter.get("/", listCommentValidations, ctrlListComment);
 //Ruta para obtener un comment segun id de un post y id de un commment
 commentRouter.get("/:commentId", getCommentValidations, ctrlGetCommentById);
 //Ruta para actualizar comment
