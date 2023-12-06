@@ -1,4 +1,4 @@
-import { header, param, body } from "express-validator";
+import { param, body } from "express-validator";
 import { isValidObjectId } from "mongoose";
 import { applyValidations } from "../../middlewares/apply-validations.js";
 
@@ -14,19 +14,16 @@ export const createPostValidations = [
     .withMessage("El campo { description } no debe estar vacio.")
     .isString()
     .withMessage("El campo { description } debe ser un string."),
-  body("username")
+  body("imageURL")
     .notEmpty()
-    .withMessage("El campo { username } no debe estar vacio.")
-    .isString()
-    .withMessage("El campo { username } debe ser un string."),
+    .withMessage("EL campo { imageURL } no debe estar vacio.")
+    .isURL()
+    .withMessage("El campo { imageURL } debe ser una URL válida."),
   applyValidations,
 ];
 
 //Validaciones para obtener la lista de posts
-export const listPostValidations = [
-  // header("authorization").exists(),
-  applyValidations,
-];
+export const listPostValidations = [applyValidations];
 //Validaciones para la obtencion de posts
 export const getPostValidations = [
   param("postId")
@@ -54,6 +51,18 @@ export const updatePostValidations = [
     .withMessage("El campo { title } no debe estar vacio.")
     .isString()
     .withMessage("El campo { title } debe ser un string."),
+  body("description")
+    .optional()
+    .notEmpty()
+    .withMessage("El campo { description } no debe estar vacio.")
+    .isString()
+    .withMessage("El campo { description } debe ser un string."),
+  body("imageURL")
+    .optional()
+    .notEmpty()
+    .withMessage("EL campo { imageURL } no debe estar vacio.")
+    .isURL()
+    .withMessage("El campo { imageURL } debe ser una URL válida."),
   applyValidations,
 ];
 
