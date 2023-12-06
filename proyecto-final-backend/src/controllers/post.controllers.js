@@ -1,5 +1,5 @@
 import { PostModel } from "../models/Post.js";
-// import { CommentModel } from "../models/Comment.js";
+import { CommentModel } from "../models/Comment.js";
 
 // Controlador para crear post
 export const ctrlCreatePost = async (req, res) => {
@@ -7,11 +7,13 @@ export const ctrlCreatePost = async (req, res) => {
 
   try {
     const { title, description, imageURL } = req.body;
+    const userName = req.user.username;
 
     const post = new PostModel({
       title,
       description,
       imageURL,
+      username: userName,
       author: userId,
     });
 
@@ -25,12 +27,11 @@ export const ctrlCreatePost = async (req, res) => {
 
 // Controlador para obtener una lista de posteos
 export const ctrlListOfPost = async (req, res) => {
-  const userId = req.user._id;
-
   try {
-    const post = await PostModel.find({
-      author: userId,
-    }).populate("comments", ["description", "author"]);
+    const post = await PostModel.find({}).populate("comments", [
+      "description",
+      "username",
+    ]);
 
     if (!post) {
       return res.status(404).json({ error: "Post no encontrado" });
@@ -44,14 +45,12 @@ export const ctrlListOfPost = async (req, res) => {
 
 // Controlador para obtener los posteos
 export const ctrlGetPost = async (req, res) => {
-  const userId = req.user._id;
   const { postId } = req.params;
 
   try {
     const post = await PostModel.findOne({
       _id: postId,
-      author: userId,
-    }).populate("comments", ["description", "author"]);
+    }).populate("comments", ["description", "username"]);
 
     if (!post) {
       return res.status(404).json({ error: "Post no encontrado" });
@@ -65,13 +64,11 @@ export const ctrlGetPost = async (req, res) => {
 
 //Controlador para actualizar post
 export const ctrlUpdatePost = async (req, res) => {
-  const userId = req.user._id;
   const { postId } = req.params;
 
   try {
     const post = await PostModel.findOne({
       _id: postId,
-      author: userId,
     });
 
     if (!post) {
@@ -90,24 +87,23 @@ export const ctrlUpdatePost = async (req, res) => {
 
 //Controlador para eliminar post
 export const ctrlDeletePost = async (req, res) => {
-  const userId = req.user._id;
   const { postId } = req.params;
 
   try {
     const post = await PostModel.findOne({
       _id: postId,
-      author: userId,
     });
 
     if (!post) {
       return res.status(404).json({ error: "Post no encontrado" });
     }
 
-    await CommentModel.deleteMany({ _id: { $in: post.comments } });
+    if (post.comments) {
+      await CommentModel.deleteMany({ _id: { $in: post.comments } });
+    }
 
     await PostModel.findOneAndDelete({
       _id: postId,
-      author: userId,
     });
 
     return res.status(200).json(post);
