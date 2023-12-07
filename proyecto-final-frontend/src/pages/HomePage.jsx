@@ -7,7 +7,7 @@ const HomePage = () => {
     <div className={styles.wrapper}>
       <h1>Foro Viajeros</h1>
       <p>Bienvenidos al foro para los viajeros más apasionados</p>
-      <Link to="">Vamos a ver las publicaciones</Link>
+      <Link to="/posts">Vamos a ver las publicaciones</Link>
     </div>
   );
 };
