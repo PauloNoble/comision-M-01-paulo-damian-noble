@@ -44,7 +44,7 @@ const NewPostPage = () => {
     <div className="container-fluid d-flex flex-column justify-content-center align-items-center mt-4 ">
       <h1 className="text-center bg-black">New Post</h1>
       <form className="d-flex flex-column mt-4 " onSubmit={handleSubmit}>
-        <div className="form-floating gap-2 justify-content-between">
+        <div className="form-floating gap-2  ">
           <input
             type="text"
             name="title"
