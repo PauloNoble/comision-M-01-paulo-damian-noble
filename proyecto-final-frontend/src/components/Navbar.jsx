@@ -1,9 +1,16 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Navbar = () => {
+  const { logout } = useContext(AuthContext);
+
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
-      <div className="container-fluid">
+    <nav
+      className="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body sticky-top"
+      data-bs-theme="dark"
+    >
+      <div className="container">
         <Link className="navbar-brand" to="/">
           Navbar
         </Link>
@@ -11,31 +18,54 @@ const Navbar = () => {
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link active" to="/">
+              <NavLink
+                className={({ isActive }) => {
+                  return isActive ? "nav-link active" : "nav-link";
+                }}
+                aria-current="page"
+                to="/"
+              >
                 Home
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/Post">
-                Post
-              </Link>
+              <NavLink
+                className={({ isActive }) => {
+                  return isActive ? "nav-link active" : "nav-link";
+                }}
+                aria-current="page"
+                to="/posts"
+              >
+                Publicaciones
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/post/new">
-                Create Post
-              </Link>
+              <NavLink
+                className={({ isActive }) => {
+                  return isActive ? "nav-link active" : "nav-link";
+                }}
+                aria-current="page"
+                to="/posts/new"
+              >
+                Agregar
+              </NavLink>
             </li>
           </ul>
+        </div>
+        <div className="d-flex" role="search">
+          <button className="btn btn-outline-danger btn-sm" onClick={logout}>
+            Logout
+          </button>
         </div>
       </div>
     </nav>

@@ -1,9 +1,9 @@
-.container {
+.wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   background: url("../../public/pexels-rafael-guajardo-604684.jpg");
   background-size: cover;
@@ -11,8 +11,17 @@
   -webkit-animation: animateBg 5s infinite;
 }
 
+@keyframes animateBg {
+  100% {
+    filter: hue-rotate(360deg);
+    -webkit-filter: hue-rotate(360deg);
+  }
+}
+/* 
 .section {
-  flex: 1;
+  height: 90vh;
+  width: 90%;
+  flex: 2;
 }
 
 .item {
@@ -24,7 +33,7 @@
   padding: 5px 10px;
   min-width: 300px;
   justify-content: space-between;
-  gap: 10px;
+  gap: 20px;
 }
 
 .item:hover {
@@ -32,21 +41,16 @@
   background-color: rgb(109, 179, 170);
 }
 
-.item > picture {
-  width: 100px;
-  height: 100px;
-}
-
 .item > picture > img {
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
   object-fit: cover;
   border-radius: 50%;
 }
 
 .item > section {
   flex: 1;
-  justify-self: flex-start;
+ 
 }
 
 .item > div {
@@ -54,3 +58,8 @@
   flex-direction: column;
   justify-content: space-around;
 }
+
+.description {
+  display: inline-flex;
+  gap: 20px;
+} */
