@@ -1,4 +1,4 @@
-const CommentItem = ({ comment }) => {
+const CommentItem = () => {
   return (
     <div key={comment._id}>
       <h2>Comentarios:</h2>

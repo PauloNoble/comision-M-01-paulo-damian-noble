@@ -11,7 +11,8 @@ const PostItem = ({
   imageURL,
   username,
   description,
-  comments,
+
+  createdAt,
   refresh,
 }) => {
   const { auth } = useContext(AuthContext);
@@ -29,7 +30,13 @@ const PostItem = ({
     <div className="card mb-3">
       <div className="row g-0">
         <div className="col-md-4">
-          <img src={imageURL} className="img-fluid rounded-start" />
+          <Link to={`/posts/${postId}`}>
+            <img
+              src={imageURL}
+              className="img-fluid rounded-start"
+              to={`/posts/${postId}`}
+            />
+          </Link>
         </div>
         <div className="col-md-8">
           <div className="card-body">
@@ -38,14 +45,25 @@ const PostItem = ({
               <b>{username}: </b>
               <span>{description}</span>
             </p>
+            <p>{createdAt}</p>
             <div className="d-flex flex-row justify-content-between">
               <span className="card-text">
-                <small className="text-body-secondary">{comments}</small>
+                {/* <div>
+                  {comments.map((comment) => {
+                    return (
+                      <small className="text-body-secondary">
+                        <h6>{comment.username}</h6>
+                        <p>{comment.description}</p>
+                        <p>Fecha: </p>
+                      </small>
+                    );
+                  })}
+                </div> */}
+                <Link className=" btn btn-success" to="/comment/:postId">
+                  Comentar
+                </Link>
               </span>
               <div>
-                <Link className="btn btn-primary" to={`/posts/${postId}`}>
-                  <BsMusicNoteList />
-                </Link>
                 <button
                   className="btn btn-danger"
                   onClick={() => {
