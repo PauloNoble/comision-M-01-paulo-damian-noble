@@ -19,8 +19,8 @@ const Post = ({ posts, getPost }) => {
 
   return (
     <div style={{ minWidth: "420px" }}>
-      {/* <Link to="/post/new" className="btn btn-success">
-        Create
+      <Link to="/post/new" className="btn btn-success">
+        Create????
       </Link>
       <input
         type="search"
@@ -30,7 +30,7 @@ const Post = ({ posts, getPost }) => {
         onChange={(e) => {
           setSearch(e.target.value);
         }}
-      /> */}
+      />
       <>
         {filterPosts.map((post) => {
           return (

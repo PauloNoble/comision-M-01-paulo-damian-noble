@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 
 const NewCommentPage = () => {
   const { postId } = useParams();
-  Comment;
 
   const [post, setPost] = useState(null);
 

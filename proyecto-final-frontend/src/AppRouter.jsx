@@ -2,10 +2,10 @@ import { Route, Routes } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import HomePage from "./pages/HomePage";
-import PostPage from "./pages/PostPage";
+import AllPostPage from "./pages/AllPostPage";
 import PrivateRoutes from "./components/PrivateRoutes";
 import NewPostPage from "./pages/NewPostPage";
-import CommentPage from "./pages/CommentPage";
+import PostPage from "./pages/PostPage";
 import NewCommentPage from "./pages/NewCommentPage";
 
 const AppRouter = () => {
@@ -14,9 +14,9 @@ const AppRouter = () => {
       {/* Rutas Protegidas */}
       <Route element={<PrivateRoutes />}>
         <Route path="/" element={<HomePage />} />
-        <Route path="/posts" element={<PostPage />} />
+        <Route path="/posts" element={<AllPostPage />} />
         <Route path="/posts/new" element={<NewPostPage />} />
-        <Route path="/posts/:postId" element={<CommentPage />} />
+        <Route path="/posts/:postId" element={<PostPage />} />
         <Route path="comment/:postId" element={<NewCommentPage />} />
       </Route>
 
