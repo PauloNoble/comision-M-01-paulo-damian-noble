@@ -28,57 +28,82 @@ const NewPostPage = () => {
       },
       body: JSON.stringify(data),
     }).then((res) => {
-      if (res.status !== 201)
+      if (res.status !== 201) {
         return Swal.fire({
           icon: "error",
           title: "Oops...",
           text: "Something went wrong!",
           timer: 2500,
         });
-
-      navigate("/post");
+      } else {
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Comment added to post",
+          timer: 2500,
+        }).then(() => {
+          navigate(`/posts`);
+        });
+      }
     });
   };
 
   return (
-    <div className="container-fluid d-flex flex-column justify-content-center align-items-center mt-4 ">
-      <h1 className="text-center bg-black">New Post</h1>
-      <form className="d-flex flex-column mt-4 " onSubmit={handleSubmit}>
-        <div className="form-floating gap-2  ">
+    <div className="container-fluid d-flex flex-column justify-content-center align-items-center mt-4">
+      <h2 className="text-center bg-black">New Post from</h2>
+
+      <form
+        className="d-flex flex-column mt-4 gap-2"
+        onSubmit={handleSubmit}
+        style={{ width: "500px" }}
+      >
+        <div className="form-floating">
           <input
             type="text"
+            description
             name="title"
             className="form-control"
             id="title"
-            placeholder="title"
+            placeholder="titulo"
           />
-          <label htmlFor="title"></label>
+          <label htmlFor="title">Titulo</label>
+        </div>
+        <div className="form-floating">
           <input
             type="text"
-            name="description"
-            className="form-control"
-            id="description"
-            placeholder="Descripcion"
-          />
-          <label htmlFor="description"></label>
-          <input
-            type="URL"
+            description
             name="imageURL"
             className="form-control"
             id="imageURL"
-            placeholder="https:/imagen.com"
+            placeholder="imageURL"
           />
-          <label htmlFor="imageURL"></label>
+          <label htmlFor="imageURL">ImageURL</label>
+        </div>
+        <div className="form-floating">
           <input
-            type="username"
+            type="text"
+            description
+            name="description"
+            className="form-control"
+            id="description"
+            placeholder="descripcion"
+          />
+          <label htmlFor="description">Descripcion</label>
+        </div>
+        <div className="form-floating">
+          <input
+            type="text"
             name="username"
             className="form-control"
             id="username"
-            placeholder="username"
+            placeholder="Myusername"
           />
-          <label htmlFor="username"></label>
+          <label htmlFor="username">Username</label>
         </div>
-        <button className="btn btn-success">Create</button>
+
+        <button className="btn btn-success" type="submit">
+          Create
+        </button>
       </form>
     </div>
   );

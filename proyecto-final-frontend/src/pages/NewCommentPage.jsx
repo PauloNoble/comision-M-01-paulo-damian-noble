@@ -74,7 +74,7 @@ const NewCommentPage = () => {
 
   return (
     <div className="container-fluid d-flex flex-column justify-content-center align-items-center mt-4">
-      <h1 className="text-center">New Comment from "{post.title}"</h1>
+      <h2 className="text-center bg-dark">New Comment from "{post.title}"</h2>
 
       <form
         className="d-flex flex-column mt-4 gap-2"
