@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { API_URL } from "../utils/consts";
 import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
@@ -99,33 +99,42 @@ const PostPage = () => {
         >
           <BsFillTrashFill />
         </button>
-        <button className="btn btn-warning">
+        <button
+          className="btn btn-warning "
+          // onClick={() => {
+          //   navigate(`/post/${postId}/edit`);
+          //   useEffect(() => {
+          //     getPost(postId);
+          //   }, []);
+          // }}
+        >
           <BsFillPencilFill />
         </button>
       </div>
-
-      <div className="w-50 d-flex flex-col gap-2 mt-4">
-        <table className="table table-bordered">
-          <thead>
-            <h6>Comentarios:</h6>
-            <tr className="text-center">
-              <th scope="col">Username</th>
-              <th scope="col">Comment</th>
-              <th scope="col">CreatedAt</th>
-            </tr>
-          </thead>
-          <tbody>
-            {post.comments.map((comment) => {
-              return (
-                <tr key={comment._id} className="text-center">
-                  <td>{comment.username}</td>
-                  <td>{comment.description}</td>
-                  <td>{comment.createdAt}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+      <div className="w-50 d-flex flex-column gap-2 mt-4">
+        <strong>Comentarios:</strong>
+        <div className="w-50 d-flex flex-col gap-2 mt-4">
+          <table className="table table-bordered">
+            <thead>
+              <tr className="text-center">
+                <th scope="col">Username</th>
+                <th scope="col">Comment</th>
+                <th scope="col">CreatedAt</th>
+              </tr>
+            </thead>
+            <tbody>
+              {post.comments.map((comment) => {
+                return (
+                  <tr key={comment._id} className="text-center">
+                    <td>{comment.username}</td>
+                    <td>{comment.description}</td>
+                    <td>{comment.createdAt}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

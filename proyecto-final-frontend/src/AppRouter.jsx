@@ -7,6 +7,7 @@ import PrivateRoutes from "./components/PrivateRoutes";
 import NewPostPage from "./pages/NewPostPage";
 import PostPage from "./pages/PostPage";
 import NewCommentPage from "./pages/NewCommentPage";
+import EditPostPage from "./pages/EditPostPage";
 
 const AppRouter = () => {
   return (
@@ -18,6 +19,7 @@ const AppRouter = () => {
         <Route path="/posts/new" element={<NewPostPage />} />
         <Route path="/posts/:postId" element={<PostPage />} />
         <Route path="comment/:postId" element={<NewCommentPage />} />
+        <Route path="posts/:postId/edit" element={<EditPostPage />} />
       </Route>
 
       {/* Rutas Públicas */}

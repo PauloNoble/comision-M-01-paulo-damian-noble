@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { API_URL } from "../utils/consts";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const PostItem = ({
   postId,
@@ -31,11 +31,7 @@ const PostItem = ({
       <div className="row g-0">
         <div className="col-md-4">
           <Link to={`/posts/${postId}`}>
-            <img
-              src={imageURL}
-              className="img-fluid rounded-start"
-              to={`/posts/${postId}`}
-            />
+            <img src={imageURL} className="img-fluid rounded-start" />
           </Link>
         </div>
         <div className="col-md-8">
@@ -59,7 +55,7 @@ const PostItem = ({
                     );
                   })}
                 </div> */}
-                <Link className=" btn btn-success" to="/comment/:postId">
+                <Link className=" btn btn-success" to={`/comment/${postId}`}>
                   Comentar
                 </Link>
               </span>

@@ -25,7 +25,7 @@ const NewCommentPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(postId);
     const formData = new FormData(e.target);
     const data = {
       description: formData.get("description"),
@@ -54,7 +54,7 @@ const NewCommentPage = () => {
           text: "Comment added to post",
           timer: 2500,
         }).then(() => {
-          navigate(`/post/${postId}`);
+          navigate(`/posts/${postId}`);
         });
       }
     });
